@@ -1,0 +1,50 @@
+# Concord reads this to install and run Chess. Admins never edit it: the
+# settings below appear as forms in Concord (Server Settings > Plugins for
+# server_config_field, the channel's own settings for create_field).
+
+[plugin]
+id = "concord-chess"
+name = "Chess"
+version = "0.1.0"            # release.go stamps the git tag here
+description = "Play chess in a channel, against each other or the computer."
+source_url = "https://github.com/JMThomas00/concord-chess"
+
+[process]
+restart_on_crash = true
+max_restarts = 5
+
+[process.entrypoint.linux]
+bin = "concord-chess"
+[process.entrypoint.darwin]
+bin = "concord-chess"
+[process.entrypoint.windows]
+bin = "concord-chess.exe"
+
+[[channel_kind]]
+kind = "table"
+display_name = "Chess Table"
+icon = "♞"
+remote_pane = true
+
+  # How people find opponents -- the table kit's seating modes.
+  [[channel_kind.create_field]]
+  key = "seating"
+  label = "Seating"
+  type = "select"
+  options = ["seats", "challenge", "private"]
+  default = "seats"
+  help = "seats: one table, sit down to play · challenge: invite members from a lobby · private: your own games with chosen opponents"
+
+  [[channel_kind.create_field]]
+  key = "allow_spectators"
+  label = "Allow spectators"
+  type = "boolean"
+  default = "true"
+  help = "Let members who aren't playing watch games"
+
+  [[channel_kind.create_field]]
+  key = "computer_opponent"
+  label = "Computer opponent"
+  type = "boolean"
+  default = "true"
+  help = "Let players play against the computer"
