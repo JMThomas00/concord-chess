@@ -36,7 +36,8 @@ You need to be the server owner, or have the **Manage Plugins** permission.
    - **Seating**: *seats* (one board; sit down with Tab, everyone else
      watches), *challenge* (a lobby where members challenge each other), or
      *private* (your own games with opponents you pick).
-   - **Allow spectators** and **Computer opponent**.
+   - **Allow spectators**, **Computer opponent**, and **Computer strength**
+     (easy, normal or hard).
 4. Select the channel and press **Tab** (or click the board) so your keys go
    to the game. **Tab** again opens the table menu: sit down, play the
    computer, resign, rematch. **Ctrl+]** gives the keyboard back to Concord.
