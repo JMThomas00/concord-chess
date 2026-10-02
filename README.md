@@ -33,14 +33,15 @@ You need to be the server owner, or have the **Manage Plugins** permission.
    restart, no files to edit.
 3. Open **Server Settings → Channels**, create a channel, and choose
    **Chess Table** as its type. Its options:
-   - **Seating**: *seats* (one board; sit down with Tab, everyone else
+   - **Seating**: *seats* (one board; sit down with M, everyone else
      watches), *challenge* (a lobby where members challenge each other), or
      *private* (your own games with opponents you pick).
    - **Allow spectators**, **Computer opponent**, and **Computer strength**
      (easy, normal or hard).
 4. Select the channel and press **Tab** (or click the board) so your keys go
-   to the game. **Tab** again opens the table menu: sit down, play the
-   computer, resign, rematch. **Ctrl+]** gives the keyboard back to Concord.
+   to the game. **M** opens the table menu: sit down, play the computer,
+   resign, rematch. **Esc** gives the keyboard back to Concord (once there's
+   nothing to cancel), and **Tab** moves on to the member list.
 
 To update later: select it in **Server Settings → Plugins**, press **U**, then
 Enter. A failed update rolls back by itself.
@@ -60,7 +61,7 @@ side has enough material to mate.
 - A pawn reaching the last rank asks what to promote to: **q r b n**.
 - **:** types a move in algebraic notation (`Nf3`, `exd5`, `O-O`, `e8=Q`) or
   coordinates (`g1f3`, `e7e8q`).
-- **Tab** opens the table menu: resign, rematch, and so on.
+- **M** opens the table menu: resign, rematch, and so on. (playing standalone, Tab does too)
 
 The board highlights the last move, and the king in red when it's in check.
 

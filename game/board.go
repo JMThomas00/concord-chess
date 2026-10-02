@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/JMThomas00/Concord/sdk/table"
+	"github.com/JMThomas00/Concord/sdk/wire"
 	"github.com/JMThomas00/concord-chess/engine"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
@@ -83,18 +84,28 @@ func (b *Board) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				b.typing, b.input, b.err = true, "", ""
 				b.cancel()
 			}
-		case "esc":
-			if b.from >= 0 {
-				b.cancel()
-				return b, nil
-			}
-			return b, tea.Quit // hand the keyboard back (in Concord)
+		case "esc": // claimed only while a piece is selected (ClaimedKeys)
+			b.cancel()
 		case "q":
 			return b, tea.Quit
 		}
 	}
 	return b, nil
 }
+
+// ClaimedKeys keeps Esc while there's something for it to cancel: a
+// selected piece, a promotion choice, or a move being typed. Otherwise Esc
+// is Concord's, to leave the pane.
+func (b *Board) ClaimedKeys() []string {
+	if b.from >= 0 || b.typing || len(b.promoting) > 0 {
+		return []string{wire.PaneKeyEsc}
+	}
+	return nil
+}
+
+// Typing (table.Typer) sends every key to the board while a move is being
+// typed, M included.
+func (b *Board) Typing() bool { return b.typing }
 
 // move steps the cursor as the viewer sees the board.
 func (b *Board) move(df, dr int) {

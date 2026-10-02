@@ -49,10 +49,21 @@ func TestTwoPlayersInAChannel(t *testing.T) {
 
 	white := srv.Enter(ch, "alice", 70, 30)
 	black := srv.Enter(ch, "bob", 70, 30)
-	srv.FrameContaining(white, "Tab: sit down")
+	srv.FrameContaining(white, "M: sit down")
 	for _, v := range []*plugintest.Viewer{white, black} {
-		srv.Key(v, "tab")
+		srv.Key(v, "m")
 		srv.Key(v, "enter")
+	}
+	srv.FrameContaining(white, "your move")
+
+	// Esc is Concord's until a piece is selected; then it deselects.
+	if srv.Key(white, "esc") {
+		t.Fatal("Esc was claimed with nothing selected")
+	}
+	srv.Key(white, "enter")
+	srv.FrameContaining(white, "choose where it goes")
+	if !srv.Key(white, "esc") {
+		t.Fatal("Esc wasn't claimed with a piece selected")
 	}
 	srv.FrameContaining(white, "your move")
 
