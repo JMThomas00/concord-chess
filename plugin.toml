@@ -57,6 +57,8 @@ remote_pane = true
   default = "normal"
   help = "How well the computer plays"
 
+  # The clock is chosen for each game, on the arcade's NEW GAME screen.
+
 # Achievements and the leaderboard. The table kit keeps every player's
 # record and unlocks these for you; members see them on Settings > About
 # > Achievements. Add your own with Rules.Awards and an entry here.
@@ -89,6 +91,43 @@ id = "streak_5"
 name = "On a Roll"
 description = "Win five games in a row"
 icon = "🔥"
+
+# Chess's own (game/arcade.go, awards).
+[[achievement]]
+id = "opera"
+name = "Night at the Opera"
+description = "Checkmate in 17 moves or fewer"
+tier = "silver"
+
+[[achievement]]
+id = "scholar"
+name = "Scholar"
+description = "Checkmate in four moves"
+tier = "gold"
+
+[[achievement]]
+id = "fork"
+name = "Fork in the Road"
+description = "Win a game with a FORK! in it"
+tier = "bronze"
+
+[[achievement]]
+id = "en_passant"
+name = "Passer-by"
+description = "Win a game with an en passant capture in it"
+tier = "bronze"
+
+[[achievement]]
+id = "back_rank"
+name = "Back Rank Blues"
+description = "Checkmate a king on its own back rank"
+tier = "bronze"
+
+[[achievement]]
+id = "beat_the_clock"
+name = "Beat the Clock"
+description = "Win with under ten seconds on your clock"
+tier = "silver"
 
 [leaderboard]
 stat = "wins"

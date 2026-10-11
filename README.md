@@ -1,7 +1,18 @@
 # Chess
 
 Chess for the terminal and for [Concord](https://github.com/JMThomas00/Concord)
-channels, from the same program.
+channels, from the same program. In Concord it's speed chess in **THE PARK**,
+on a stone table: a title screen replaying Morphy's Opera Game, a chess clock
+(none, 10 or 5 minutes, or 3 + 2) chosen before every game, callouts for
+**CHECK!**, **FORK!**, **CASTLE!**, **EN PASSANT!** and **PROMOTED!**, chiptune
+sounds with the clock slapped after every move, a Hall of Fame, and
+**Quarters** to spend at **THE PAWN SHOP** on piece sets and boards.
+
+The board grows with the window: big panes get big pieces. Each player picks
+how pieces are drawn at THE PAWN SHOP (all four are free): **pixels** with an
+outline, **fine pixels** (twice the detail across), the font's own
+**symbols**, or plain **letters**. Small panes always use symbols, which stay
+sharp at one cell.
 
 ## Play it on your own computer
 

@@ -37,7 +37,8 @@ func TestGameAdapter(t *testing.T) {
 }
 
 // Two players sit down and open e4 e5 Nf3: moving pieces with the keyboard
-// (Black on a flipped board) and typing a move.
+// (Black on a flipped board) and typing a move, in a pane too small for
+// the arcade.
 func TestTwoPlayersInAChannel(t *testing.T) {
 	srv := plugintest.NewServer(t)
 	ctx, cancel := context.WithCancel(context.Background())
@@ -47,8 +48,12 @@ func TestTwoPlayersInAChannel(t *testing.T) {
 	ch := uuid.New()
 	srv.Channel(wire.Channel{ID: ch, Name: "chess"})
 
-	white := srv.Enter(ch, "alice", 70, 30)
-	black := srv.Enter(ch, "bob", 70, 30)
+	white := srv.Enter(ch, "alice", 60, 22)
+	black := srv.Enter(ch, "bob", 60, 22)
+	for _, v := range []*plugintest.Viewer{white, black} {
+		srv.FrameContaining(v, "Enter to play")
+		srv.Key(v, "enter")
+	}
 	srv.FrameContaining(white, "M: sit down")
 	for _, v := range []*plugintest.Viewer{white, black} {
 		srv.Key(v, "m")

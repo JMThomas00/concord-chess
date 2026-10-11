@@ -2,6 +2,7 @@ package game
 
 import (
 	"strings"
+	"time"
 
 	"github.com/JMThomas00/Concord/sdk/table"
 	"github.com/JMThomas00/Concord/sdk/wire"
@@ -25,6 +26,9 @@ type Board struct {
 
 	typing bool   // entering a move after ':'
 	input  string // what's been typed
+
+	callout   string // CHECK!, FORK!... for a moment after a move
+	calloutAt time.Time
 }
 
 func newBoard(s *table.Seat) *Board {
@@ -58,6 +62,9 @@ func (b *Board) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case table.ChangedMsg:
 		b.err, b.typing = "", false
 		b.cancel()
+		if msg.Move != "" {
+			b.callout, b.calloutAt = calloutFor(b.game()), time.Now()
+		}
 	case tea.KeyMsg:
 		if b.typing {
 			b.typeKey(msg)
