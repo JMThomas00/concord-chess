@@ -166,8 +166,8 @@ func TestDrawing(t *testing.T) {
 	}
 	for _, v := range []string{"none", "10", "3+2"} {
 		c := arcade.New(90, 40, arcade.NewPalette(nil))
-		setupPreview(c, map[string]string{OptionClock: v}, ax, ay, 40, 12)
-		inside("setup "+v, 40, 12, c)
+		setupPreview(c, map[string]string{OptionClock: v}, ax, ay, 30, 13)
+		inside("setup "+v, 30, 13, c)
 	}
 	draw := func(frame int) string {
 		c := arcade.New(90, 40, arcade.NewPalette(nil))

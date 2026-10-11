@@ -51,7 +51,7 @@ var pieceSets = []pieceSet{
 type boardStyle struct {
 	arcade.Unlockable
 	light, dark string
-	decor       string // "moss", "dots", "lamp", "chalk" or ""
+	decor       string // "dots", "lamp", "chalk" or ""
 }
 
 func board(id, name string, tier arcade.Tier, blurb, light, dark, decor string) boardStyle {
@@ -61,7 +61,7 @@ func board(id, name string, tier arcade.Tier, blurb, light, dark, decor string) 
 // Squares are mid tones, so white pieces and black pieces both stand out
 // on both.
 var boardStyles = []boardStyle{
-	board("stone", "STONE TABLE", arcade.Starter, "Under the plane trees.", "dim", "greenD", "moss"),
+	board("stone", "STONE TABLE", arcade.Starter, "Under the plane trees.", "dim", "greenD", ""),
 	board("vinyl", "TOURNAMENT VINYL", arcade.Starter, "Rolls up for the bus.", "yellowD", "greenD", ""),
 	board("walnut", "WALNUT", arcade.Common, "Inlaid at the club.", "orangeD", "redD", ""),
 	board("newsprint", "NEWSPRINT", arcade.Common, "The puzzle page.", "dim", "comment", "dots"),

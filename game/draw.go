@@ -219,9 +219,6 @@ func drawPiece(c *arcade.Canvas, kind, color, x, y int, sz size, st string, s *p
 // decorate dresses an empty square in the board's style.
 func decorate(c *arcade.Canvas, decor string, x, y int, sz size, rank, file int, dark bool, bg string) {
 	switch {
-	case decor == "moss" && dark && (rank*5+file*3)%7 == 0 && sz.sw >= 5:
-		c.Px(x, 2*(y+sz.sh)-1, "green")
-		c.Px(x+1, 2*(y+sz.sh)-1, "green")
 	case decor == "dots" && dark && sz.sw >= 5:
 		c.Text(x+sz.sw/2, y+(sz.sh-1)/2, "·", "tire", bg, false)
 	case decor == "chalk" && !dark && sz.sw >= 5:
@@ -296,26 +293,27 @@ func preview(c *arcade.Canvas, id string, sel map[string]string, x, y, w, h int,
 
 func hasPrefix(s, p string) bool { return len(s) > len(p) && s[:len(p)] == p }
 
-// setupPreview is the NEW GAME screen's picture: the chess clock, set.
+// setupPreview is the NEW GAME screen's picture (30 x 13, in the kit's own
+// box): both sides of the chess clock, set.
 func setupPreview(c *arcade.Canvas, options map[string]string, x, y, w, h int) {
 	base, inc := clock(options)
-	cw := 2*arcade.DigitWidth(1) + 3 // the minutes, then ":00"
-	bw := 2*cw + 10
-	x0 := x + max(0, (w-bw)/2)
+	face := 2*arcade.DigitWidth(1) - 1 + 3 // two digits, then ":00"
+	x0 := x + max(0, (w-(2*face+3))/2)
 	top := y + max(0, (h-8)/2)
-	c.Box(x0, top, min(bw, w), 7, "comment", "CLOCK", "pink")
+	c.CenterIn(x, w, top, "THE CLOCK", "pink", "", true)
 	if base == 0 {
-		c.CenterIn(x0, min(bw, w), top+3, "NO CLOCK", "dim", "", true)
+		c.CenterIn(x, w, top+3, "NO CLOCK", "dim", "", true)
+		c.CenterIn(x, w, top+4, "TAKE YOUR TIME", "dim", "", false)
 		return
 	}
 	for side := 0; side < 2; side++ {
-		cx := x0 + 3 + side*(cw+4)
-		c.Number(int(base/time.Minute), 2, cx, 2*(top+1)+1, "yellow", 1)
-		c.Text(cx+2*arcade.DigitWidth(1)-1, top+3, ":00", "yellow", "", true)
-		c.CenterIn(cx, cw, top+5, []string{"WHITE", "BLACK"}[side], "dim", "", false)
+		cx := x0 + side*(face+3)
+		c.Number(int(base/time.Minute), 2, cx, 2*(top+2), "yellow", 1)
+		c.Text(cx+2*arcade.DigitWidth(1)-1, top+4, ":00", "yellow", "", true)
+		c.CenterIn(cx, face, top+6, []string{"WHITE", "BLACK"}[side], "dim", "", false)
 	}
 	if inc > 0 && h >= 9 {
-		c.CenterIn(x, w, top+7, "+"+itoa(int(inc/time.Second))+" SECONDS A MOVE", "dim", "", false)
+		c.CenterIn(x, w, top+8, "+"+itoa(int(inc/time.Second))+" SECONDS A MOVE", "dim", "", false)
 	}
 }
 
